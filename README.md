@@ -1,10 +1,20 @@
 # blue-radio-shell
-some shell scripts to run a radio through a bluetooth speaker
+Some shell scripts to play music through a bluetooth speaker
 
 ## Summary
 
 These scripts were written to facilitate an online radio alarm clock, running
 on a reaspberry pi zero w with raspbian stretch, playing the music through a bluetooth speaker.
+
+### `connect.sh`
+
+Attempts to use `bluetoothctl` to connect to the MAC address `SPEAKER_ADDRESS`. Will try to connect `CONNECT_TRIALS` times.
+
+### `radio.sh`
+
+Attempts to connect using `connect.sh`, sets the volume of the `bluealsa`
+device to `VOLUME` and proceeds to play the media at `MUSIC_SOURCE` using
+`mplayer`.
 
 ## Config
 
@@ -13,11 +23,22 @@ such as:
 
 - `SPEAKER_ADDRESS` MAC address of the bluetooth speaker (mandatory)
 - `CONNECT_TRIALS` number of tries for connecting before giving up (mandatory)
-
+- `MUSIC_SOURCE` uri to music source to be played (mandatory)
+- `SET_VOLUME` command or script to set volume (optional)
+- `VOLUME` set the volume (optional)
 
 ## Usage
 
 TODO describe
+- example: cronjob!
+Exemplary manual exeution of radio script:
+```
+sudo env SPEAKER_ADDRESS=40:3f:2d:be:c6:a2 \
+MUSIC_SOURCE=https://wdr-wdr2-rheinruhr.sslcast.addradio.de/wdr/wdr2/rheinruhr/mp3/128/stream.mp3 \
+SET_VOLUME=test.sh
+VOLUME=50% ./radio.sh
+```
+assuming that you're
 
 ## Requirements
 
@@ -26,12 +47,17 @@ These scripts use the following binaries, which hence must be installed:
 - `bash`
 - `bluetoothctl`
 - `xargs`
+- `mplayer`
 
 The scripts (without further adjustments) must be run as sudo, as we otherwise
-don't have access to the bluetooth controller and what not.
+don't have access to the bluetooth controller and what not. Could probably look
+into that, to create a user that has just the needed privileges to access the
+bluetooth stack.
 
-They've only been tested (manually) on a raspbian stretch system running on a
+This project has only been tested (manually) on a raspbian stretch system running on a
 raspberry pi zero w.
+
+alsa device `bluealsa`, bluez-alsa setup, ...
 
 TODO which packages should one install to have this running?
 Which steps taken to configure everything? is trusting necessary?
