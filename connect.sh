@@ -16,7 +16,7 @@ if [ "$CONNECTED" == "yes" ]; then echo 'Already connected!' && exit 0; fi
 
 CONN_MAX_TRY=$CONNECT_TRIALS
 
-echo "Will try to connext $trials time(s)..."
+echo "Will try to connext $CONN_MAX_TRY time(s)..."
 echo
 
 trial=1
