@@ -16,6 +16,17 @@ Attempts to connect using `connect.sh`, sets the volume of the `bluealsa`
 device to `VOLUME` and proceeds to play the media at `MUSIC_SOURCE` using
 `mplayer`.
 
+### `set_volume_t5.sh`
+
+Script for setting the volume using a specific control on the `blualsa` device,
+with `amixer`. Couldn't figure out a good way of generalizing this one, so it's
+pretty much unusable by others, but I included it for reference.
+
+### `kill_radio.sh`
+
+Script that takes one argument, the name of the process playing the music, and
+attempts to find its PID and kill it.
+
 ## Config
 
 Various pieces of information can be configured through environment variables,
@@ -29,16 +40,16 @@ such as:
 
 ## Usage
 
-TODO describe
-- example: cronjob!
+TODO add example: cronjob!
+
 Exemplary manual exeution of radio script:
 ```
 sudo env SPEAKER_ADDRESS=40:3f:2d:be:c6:a2 \
 MUSIC_SOURCE=https://wdr-wdr2-rheinruhr.sslcast.addradio.de/wdr/wdr2/rheinruhr/mp3/128/stream.mp3 \
-SET_VOLUME=test.sh
+SET_VOLUME=set_volume_t5.sh \
 VOLUME=50% ./radio.sh
 ```
-assuming that you're
+assuming that you're in the same folder as the scripts.
 
 ## Requirements
 
