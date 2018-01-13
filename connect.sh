@@ -1,6 +1,4 @@
 #!/bin/bash
-# exit on non zero return
-set -e
 # error if unbound variable used
 set -u
 
@@ -9,10 +7,11 @@ if [ -z "$SPEAKER_ADDRESS" ]; then
   exit 1
 fi
 
-CONNECTED=$(echo "info $SPEAKER_ADDRESS" | bluetoothctl 2>&1 | xargs -L 1 echo \
-  | grep -e Connected: | awk '{ print $2 }')
+export SPEAKER_ADDRESS
+./connected.sh
 
-if [ "$CONNECTED" == "yes" ]; then echo 'Already connected!' && exit 0; fi
+if [ "$?" -eq "0" ]; then echo 'Already connected!' && exit 0;
+else echo not connected; fi
 
 CONN_MAX_TRY=$CONNECT_TRIALS
 
