@@ -13,7 +13,7 @@ export SPEAKER_ADDRESS
 if [ "$?" -eq "0" ]; then echo 'Already connected!' && exit 0;
 else echo not connected; fi
 
-CONN_MAX_TRY=$CONNECT_TRIALS
+CONN_MAX_TRY=${CONNECT_TRIALS:-2}
 
 echo "Will try to connext $CONN_MAX_TRY time(s)..."
 echo
