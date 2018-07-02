@@ -18,7 +18,7 @@ fi
 
 CONNECT_TRIALS=5
 
-source ./connect.sh
+connect.sh
 
 DEVICE="$(amixer -D bluealsa)"
 

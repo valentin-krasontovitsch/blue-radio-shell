@@ -8,12 +8,12 @@ if [ -z "$SPEAKER_ADDRESS" ]; then
 fi
 
 export SPEAKER_ADDRESS
-./connected.sh
+connected.sh
 
 if [ "$?" -eq "0" ]; then echo 'Already connected!' && exit 0;
-else echo not connected; fi
+else echo not connected; echo; fi
 
-CONN_MAX_TRY=${CONNECT_TRIALS:-2}
+CONN_MAX_TRY=${CONNECT_TRIALS:-1}
 
 echo "Will try to connext $CONN_MAX_TRY time(s)..."
 echo
@@ -30,11 +30,11 @@ while true; do
     echo We are connected!
     break
   else
-    echo Failed to connect... Push scan button on speaker?
     echo Trial \# $trial
     if [ $trial -eq $CONN_MAX_TRY ]; then
       echo Reached limit of $CONN_MAX_TRY failed connection trials
-      exit 0
+      echo Failed to connect... Push scan button on speaker? >&2
+      exit 1
     fi
   fi
   let "trial += 1"
