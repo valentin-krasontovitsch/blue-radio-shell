@@ -1,19 +1,20 @@
 #!/bin/bash
 # error if unbound variable used
-set -u
 
+SPEAKER_ADDRESS=$1
 if [ -z "$SPEAKER_ADDRESS" ]; then
-  echo "bluetooth speaker address not set!"
+  echo "usage: $0 SPEAKER_MAC_ADDRESS [MAX_CONNECT_TRIALS]"
   exit 1
 fi
 
-export SPEAKER_ADDRESS
-connected.sh
+set -u
+
+connected.sh $SPEAKER_ADDRESS
 
 if [ "$?" -eq "0" ]; then echo 'Already connected!' && exit 0;
 else echo not connected; echo; fi
 
-CONN_MAX_TRY=${CONNECT_TRIALS:-1}
+CONN_MAX_TRY=${2:-1}
 
 echo "Will try to connext $CONN_MAX_TRY time(s)..."
 echo
