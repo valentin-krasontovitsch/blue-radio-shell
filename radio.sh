@@ -23,4 +23,4 @@ if [ ! -z "$VOLUME" ]; then
   source set_volume.sh $VOLUME
 fi
 
-mplayer $MUSIC_SOURCE
+mplayer -quiet $MUSIC_SOURCE
