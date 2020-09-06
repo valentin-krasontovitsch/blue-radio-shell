@@ -2,12 +2,13 @@
 # exit non non-zero return code
 set -e
 HELP="Usage: $0 SPEAKER_MAC_ADDRESS MUSIC_SOURCE [VOLUME]"
+errecho(){ >&2 echo $@; }
 
 SPEAKER_ADDRESS=$1
 MUSIC_SOURCE=$2
 
 if [ -z "$SPEAKER_ADDRESS" ] || [ -z "$MUSIC_SOURCE" ]; then
-  echo $HELP
+  errecho $HELP
   exit 1
 fi
 

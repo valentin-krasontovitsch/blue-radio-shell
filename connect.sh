@@ -1,9 +1,11 @@
 #!/bin/bash
 # error if unbound variable used
 
+errecho(){ >&2 echo $@; }
+
 SPEAKER_ADDRESS=$1
 if [ -z "$SPEAKER_ADDRESS" ]; then
-  echo "usage: $0 SPEAKER_MAC_ADDRESS [MAX_CONNECT_TRIALS]"
+  errecho "usage: $0 SPEAKER_MAC_ADDRESS [MAX_CONNECT_TRIALS]"
   exit 1
 fi
 
@@ -21,7 +23,7 @@ while true; do
     break
   else
     if [ $trial -eq $CONN_MAX_TRY ]; then
-      echo Failed to connect. Speaker not ready? >&2
+      errecho Failed to connect. Speaker not ready? >&2
       exit 1
     fi
   fi

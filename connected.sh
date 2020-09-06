@@ -2,8 +2,10 @@
 # error if unbound variable used
 SPEAKER_ADDRESS=$1
 
+errecho(){ >&2 echo $@; }
+
 if [ -z "$SPEAKER_ADDRESS" ] ; then
-  echo Usage: $0 SPEAKER_MAC_ADDRESS
+  errecho Usage: $0 SPEAKER_MAC_ADDRESS
   exit 1
 fi
 
