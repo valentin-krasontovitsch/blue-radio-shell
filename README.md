@@ -4,11 +4,13 @@ Some shell scripts to play music through a bluetooth speaker
 ## Summary
 
 These scripts were written to facilitate an online radio alarm clock, running
-on a reaspberry pi zero w with raspbian stretch, playing the music through a bluetooth speaker.
+on a reaspberry pi zero w with raspbian stretch, playing the music through a
+bluetooth speaker.
 
 ### `connect.sh`
 
-Attempts to use `bluetoothctl` to connect to the MAC address `SPEAKER_ADDRESS`. Will try to connect `CONNECT_TRIALS` times.
+Attempts to use `bluetoothctl` to connect to the MAC address `SPEAKER_ADDRESS`.
+Will try to connect `CONNECT_TRIALS` times.
 
 ### `radio.sh`
 
@@ -16,7 +18,7 @@ Attempts to connect using `connect.sh`, sets the volume of the `bluealsa`
 device to `VOLUME` and proceeds to play the media at `MUSIC_SOURCE` using
 `mplayer`.
 
-### `set_volume_t5.sh`
+### `set_volume.sh`
 
 Script for setting the volume using a specific control on the `blualsa` device,
 with `amixer`. Couldn't figure out a good way of generalizing this one, so it's
@@ -46,7 +48,7 @@ Exemplary manual exeution of radio script:
 ```
 sudo env SPEAKER_ADDRESS=40:3f:2d:be:c6:a2 \
 MUSIC_SOURCE=https://wdr-wdr2-rheinruhr.sslcast.addradio.de/wdr/wdr2/rheinruhr/mp3/128/stream.mp3 \
-SET_VOLUME=set_volume_t5.sh \
+SET_VOLUME=set_volume.sh \
 VOLUME=50% ./radio.sh
 ```
 assuming that you're in the same folder as the scripts.
